@@ -1,0 +1,423 @@
+// Test301
+
+program test301
+
+const int nula = 0;
+const int jedan = 1;
+const int pet = 5;
+
+int niz[];
+char nizch[];
+
+int a;
+
+set s1, s2, s3;
+	
+{
+	void main()	
+		int bodovi;
+		int temp;
+	{
+		bodovi = 0;
+		bodovi++;
+		bodovi = bodovi + jedan;
+		bodovi = bodovi * pet;
+		bodovi--;
+		print(bodovi); //9
+		print(eol);
+		
+		niz = new int[3];
+		niz[nula] = dva;
+		niz[jedan] = 3;
+		niz[niz[nula]] = niz[niz[1]] * 4;
+		bodovi = niz[2]/niz[0];
+		print(bodovi); //6
+		print(eol);
+		print(niz[2]); //12
+		print(eol);
+		
+		nizch = new char[3];
+		nizch[0] = 'a';
+		nizch[jedan] = 'b';
+		nizch[pet - 3] = 'c';
+		print(nizch[1]); //b
+		print(eol);
+		print(nizch[jedan * 2]); //c
+		print(eol);
+		print(ord(nizch[0])); //97
+			
+		a=1;
+		read(bodovi);
+		bodovi = -bodovi + (pet * a / 2 - nula) * bodovi - (3 % 2 + 3 * 2 - 7); 
+		print(bodovi); //bodovi
+		
+		niz[0] = 1; niz[1] = 2; niz[2] = 3;
+		s1 = new set[5]; s2 = new set[5]; s3 = new set[10];
+		addAll(s1, niz);
+		add(s2, 3); add(s2, 4); add(s2, 5);
+		s3 = s1 union s2;
+		print(s3); //1 2 3 4 5
+		print(eol);
+		
+		niz[0] = 5; niz[1] = 5; niz[2] = 10;
+		s1 = new set[5]; s2 = new set[5]; s3 = new set[10];
+		addAll(s1, niz);
+		read(temp); add(s2, temp);
+		read(temp); add(s2, temp);
+		read(temp); add(s2, temp);
+		s3 = s1 union s2;
+		print(s3); // 5 10 union {3 procitana broja}
+		
+	}
+}
+
+
+
+######################################################################
+
+program ProgramName
+const int constDecl = true, constDecl2 = 3, constDecl2 = 3;
+int varDecl [];
+char varDecl2, charDecl2, b;
+bool varDecl3[];
+{
+	void methodDecl(int formPar1, char formPar2) 
+		//bool optVarDecl, optVarDecl2[];
+		{
+			a = c; b = d;
+			break;
+			continue;
+			read(desig);
+			print(fdas, 123, 2);
+			
+			return;
+			
+			{ break; }
+		}
+}
+
+########################################################################
+
+program test301
+
+const int nula = 0;
+const int jedan = 1;
+const int pet = 5;
+
+int niz[];
+char nizch[];
+
+int a;
+
+//set s1, s2, s3;
+	
+{
+void main()	
+		int bodovi;
+		int temp;
+	{
+		//isproveravano, sve radi
+		//a.b.c[a('a' + c - d , new String[-b], new Integer(-1)%b/c , -a)]; b;
+
+		a++; 
+		{ b--; }
+		b[b[1]] = a + b;
+		
+		break;
+		continue;
+		
+		return (a + b);
+		
+		read(a);
+		print(a, 1, 2);
+	}
+}
+
+#############################################################################
+
+
+program MJProgram
+	int x,z[]; 
+	const int y = 1, b = 2, h = 3;
+	const boolean l = true;
+	const char ch = 'b';
+{
+	void main() 
+	int a; char t;
+	{
+		print(1);
+		
+		x = y + 5 + 3 * 1;
+		
+		ch = 'a';
+		
+		//x = ch;
+		
+		z = z union z;
+		
+		z = new int[1];
+		
+		x = z[1];
+		
+		//x = ch;
+		
+		//print(z);
+		
+		if(x == y){}
+		
+		x++;
+		
+		//ch++;
+		
+		//addAll(x,z);
+		
+		print(2);
+		
+		//k();
+		
+		l = false;
+		
+		read(x);
+		
+		print(x);
+		
+		return;
+	}
+
+}
+
+
+-------------------------------------------------------
+stack state:
+item
+array
+----
+	/* storing elements to local variables */
+store dummy //array (or maybe dup and store cause maybe ill lose reference)
+store dummy1 //item
+
+push 0
+store dummy2 //index
+	/* end storing elements to local variables */
+
+
+loop_start
+	/* check if array element of index is 0 */
+load dummy //array
+load dummy2 //index
+aload
+push 0
+	/* if element is 0 store index to array and finish function */
+jne continue
+
+	/* store index to array and finish function */
+load dummy //array
+load dummy2 //index
+load dummy1 //item
+astore
+jmp end //not sure if end should be manually calculated (count function calls and store constant value)
+
+	/* inc index, compare it with arraylen, if not equal (or lower or somethin) loop again*/
+continue
+load dummy2 //index
+push 1
+inc
+store dummy2 //index
+load dummy2 //index
+load dummy //array
+arraylen
+jne loop_start
+
+end
+//pop not needed values optionally or do return
+
+#################################################################
+			addAll
+
+stack state //check arr order
+arr1 
+arr2
+
+#for all elements of arr2 do add to arr1#
+
+/* store needed values to local variables */
+store arr2, dummySet2 //arr2
+store arr1, dummySet3 //arr1
+
+load dummySet2 //arr2
+arraylen
+store dummy3 //len(arr2)
+
+load 0
+store dummy4 //index
+/* end store */
+
+loopStart = code.pc
+
+//load item (arr2[index])
+load dummySet2 //check instruction order
+load dummy4 //index
+aload //item loaded
+//load arr1
+load dummySet3 //arr1
+
+add()
+
+/* increment index */
+load dummy4 //index
+load 1
+add
+store dummy4 //index
+
+/* if index < len(arr2) jump(loopStart) */
+load dummy4 //index
+load dummy3 //len(arr2)
+putFalseJump(Code.eq, loopStart) //if ne iterate again
+
+#################################################################
+			union
+
+//stack s1 s2 s3
+
+s1 = s2 union s3
+
+//load s1 s2 s3 to dummies
+
+addAll(s1,s2)
+
+//isti kod kao addAll, samo preskace i 0 i elemente koji su vec u s1
+// (deo koda)
+loopStart1
+
+load arr2
+load index
+aload
+load 0
+jeq skipAdd
+
+/* novi deo koda */
+load len(arr2)
+store len(arr2)
+
+load 0
+store index1
+
+loopStart2
+
+load arr2[index1]
+load arr3[index]
+jeq skipAdd
+
+load index1
+load 1
+add
+store index1
+
+load index
+load len(arr2)
+jne loopStart2
+
+/* kraj novi deo koda */
+
+add() // s1, s3[index]
+
+skipAdd
+
+load index
+load 1
+add
+store index
+
+load index
+load len(arr1)
+jne loopStart1 //ako nisu jednaki vrti dalje
+
+
+#################################################################
+			print set
+
+load set
+store dummy1 //set
+
+load dummy1 //set
+arraylen
+store dummy2 //len(set)
+
+load 0
+store dummy3 //index
+
+loopStart = Code.pc
+
+load dummy1 //set
+load dummy3 //index
+aload
+
+load 0
+jeq skip
+
+// if != 0 print
+load dummy1//set
+load dummy3//index
+aload
+
+load 5
+print
+
+skip:
+
+load dummy3 //index
+load 1
+add
+store dummy3 //index
+
+load dummy3 //index
+load dummy2 //len(set)
+jne loopstart
+
+
+#################################################################
+
+//test
+			
+			// Reserve a temporary variable (register) for loop counter
+	        int counter = 3; // Loop should run 3 times
+	        
+	        Code.loadConst(counter);   // Load 3 onto stack
+	        Code.store(SemanticPass.dummy1);             // Store it in a temporary location (e.g., local variable 0)
+	        
+	        int loopStart = Code.pc; // Store the start of the loop
+
+	        Code.load(SemanticPass.dummy1);  // Load counter
+	        Code.loadConst(0);         // Load constant 0
+	        Code.putFalseJump(Code.ne, 0); // If counter == 0, jump (patch later)
+	        int jumpExitAdr = Code.pc - 2; // Save address for patching
+
+	        Code.load(SemanticPass.dummy1);          // Load 1
+	        Code.loadConst(5);			// for int print
+	        Code.put(Code.print);       // Print 1
+
+	        Code.load(SemanticPass.dummy1);              // Load counter
+	        Code.loadConst(1);         // Load 1
+	        Code.put(Code.sub);        // Subtract 1 (decrement counter)
+	        Code.store(SemanticPass.dummy1);             // Store back into counter
+
+	        Code.putJump(loopStart);   // Jump back to loop start
+
+	        Code.fixup(jumpExitAdr);   // Patch the exit jump location
+			
+//kraj testa
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
